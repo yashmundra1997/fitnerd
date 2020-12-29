@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <h1 style="text-align: center;color: white">Calculate BMI</h1>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    </head>
+    <body style="background-color:darkslategrey">
+        <div style="text-align: center;background-color:lightsteelblue">
+            <br/>
+            <label>Weight in kg</label>
+            <input type="text" style="height: 40px;box-shadow: 5px 10px 18px #888888;" name="weight" id="weight" placeholder="Weight in kg" value=""/>
+            <br></br>
+            <label>Height in meter</label>
+            <input type="text" style="height: 40px;box-shadow: 5px 10px 18px #888888;" name="height" id="height" placeholder="Height in meter" value=""/>
+            <br></br>
+            <button type="button" style="box-shadow: 5px 10px 18px #888888;"  class="btn" onclick="CalculateBMI()">Calculate</button>
+            <br><br/>
+            <span id="BMI" style="font-size: 40px;"></span>
+        </div>
+            <script>
+                function CalculateBMI()
+                {
+                    var weight=parseInt(document.getElementById("weight").value);
+                    var height=parseFloat(document.getElementById("height").value);
+                    var Bmi=document.getElementById("BMI");
+                    var bmi=weight/(height*height);
+                    bmi=bmi.toFixed(2);
+                    Bmi.innerHTML="Your BMI is " +bmi;
+                }
+            </script>
+    </body>
+</html>

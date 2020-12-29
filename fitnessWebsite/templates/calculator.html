@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head style="background-color: aqua;">
+        <h1 style="text-align: center;color: white;">Macronutrient Calculator</h1>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    </head>
+    <body style="background-color:darkslategrey">
+        <div style="text-align: center;background-color:lightsteelblue">
+            <br/>
+            <label>Your age</label>
+            <input type="text" style="height: 40px;box-shadow: 5px 10px 18px #888888;" id="age" placeholder="Enter you age"></input>
+            <br/> <br/> 
+            <label>Your weight in kg</label>
+            <input type="text" style="height: 40px;box-shadow: 5px 10px 18px #888888;" id="weight" placeholder="Enter you weight in kg"></input>
+            <br/> <br/> 
+            <label>Your height in cm</label>
+            <input type="text" style="height: 40px;box-shadow: 5px 10px 18px #888888;" id="height" placeholder="Enter your height in cm"/>
+            <br/> <br/>
+            <h1>How much intensity of physical work you do per week</h1>
+            <button type="button" style="box-shadow: 5px 10px 18px #888888;" id="none" class="btn" onclick="calculate(this.id)">None</button>
+            <button type="button" style="box-shadow: 5px 10px 18px #888888;" id="little" class="btn" onclick="calculate(this.id)">Little</button>
+            <button type="button" style="box-shadow: 5px 10px 18px #888888;" id="moderate" class="btn"  onclick="calculate(this.id)">Moderate</button>
+            <button type="button" style="box-shadow: 5px 10px 18px #888888;" id="lot" class="btn" onclick="calculate(this.id)">A lot</button>
+            <button type="button" style="box-shadow: 5px 10px 18px #888888;" id="ton" class="btn" onclick="calculate(this.id)">Ton</button>
+            <h1>Do you want to </h1>
+            <button type="button" style="box-shadow: 5px 10px 18px #888888;background-color:blue;color: white;" id="loseFat" class="btn" onclick="calculateCalorie(this.id)">Lose fat</button>
+            <button type="button" style="box-shadow: 5px 10px 18px #888888;background-color:red;color: white;" id="leanMuscle" class="btn" onclick="calculateCalorie(this.id)">Lean Muscle</button>
+            <button type="button" style="box-shadow: 5px 10px 18px #888888;background-color:green;color: white;" id="maintain" class="btn" onclick="calculateCalorie(this.id)">Maintain</button>
+            <br/>
+            <br/>
+            <span id='description' style="font-size: 40px;"></span>
+            <br/>
+            <span id='calorie' style="font-size: 20px;"></span>
+            <br/>
+            <span id='protein' style="font-size: 20px;"></span>
+            <br/>
+            <span id='carbs' style="font-size: 20px;"></span>
+            <br/>
+            <span id='fat' style="font-size: 20px;"></span>
+        </div>
+            <script>
+                var BMR,tdee;
+                function calculate(id){
+                    var age=parseInt(document.getElementById("age").value);
+                    var weight=parseInt(document.getElementById("weight").value);
+                    var height=parseInt(document.getElementById("height").value);
+                    BMR=((10*weight)+(6.25*height)-(5*age))+5;
+                    if(id==="none")
+                    {
+                        tdee=BMR*1.15;
+                    }
+                    else if(id==="little")
+                    {
+                        tdee=BMR*1.35;
+                    }
+                    else if(id==="moderate")
+                    {
+                        tdee=BMR*1.55;
+                    }
+                    else if(id==="lot")
+                    {
+                        tdee=BMR*1.75;
+                    }
+                    else if(id==="ton")
+                    {
+                        tdee=BMR*1.95;
+                    }
+                }
+                function calculateCalorie(id){
+                    var totalCalorie=document.getElementById("calorie");
+                    var totalProtein=document.getElementById("protein");
+                    var totalCarbs=document.getElementById("carbs");
+                    var totalFat=document.getElementById("fat");
+                    var description=document.getElementById("description");
+                    if(id==="loseFat")
+                    {
+                        var calorie=tdee*0.9;
+                        var protein=(tdee*0.4)/4;
+                        var carbs=(tdee*0.4)/4;
+                        var fat=(tdee*0.2)/9;
+                        description.style.color="blue";
+                        description.innerHTML="For Fat loss";
+                        totalCalorie.style.color="blue";
+                        totalProtein.style.color="blue";
+                        totalCarbs.style.color="blue";
+                        totalFat.style.color="blue";
+                        totalCalorie.innerHTML="Calories= "+Math.round(calorie);
+                        totalProtein.innerHTML="Protein= "+Math.round(protein)+"gm";
+                        totalCarbs.innerHTML="Carbs= "+Math.round(carbs)+"gm";
+                        totalFat.innerHTML="Fat= "+Math.round(fat)+"gm";
+                    }
+                    else if(id==="leanMuscle")
+                    {
+                        var calorie=tdee*1.1;
+                        var protein=(tdee*0.25)/4;
+                        var carbs=(tdee*0.55)/4;
+                        var fat=(tdee*0.2)/9;
+                        description.style.color="red";
+                        description.innerHTML="For Muscle gain";
+                        totalCalorie.style.color="red";
+                        totalProtein.style.color="red";
+                        totalCarbs.style.color="red";
+                        totalFat.style.color="red";
+                        totalCalorie.innerHTML="Calories= "+Math.round(calorie);
+                        totalProtein.innerHTML="Protein= "+Math.round(protein)+"gm";
+                        totalCarbs.innerHTML="Carbs= "+Math.round(carbs)+"gm";
+                        totalFat.innerHTML="Fat= "+Math.round(fat)+"gm";
+                    }
+                    else if(id==="maintain")
+                    {
+                        var calorie=tdee;
+                        var protein=(tdee*0.3)/4;
+                        var carbs=(tdee*0.45)/4;
+                        var fat=(tdee*0.25)/9;
+                        description.style.color="green";
+                        description.innerHTML="For Maintain";
+                        totalCalorie.style.color="green";
+                        totalProtein.style.color="green";
+                        totalCarbs.style.color="green";
+                        totalFat.style.color="green";
+                        totalCalorie.innerHTML="Calories= "+Math.round(calorie);
+                        totalProtein.innerHTML="Protein= "+Math.round(protein)+"gm";
+                        totalCarbs.innerHTML="Carbs= "+Math.round(carbs)+"gm";
+                        totalFat.innerHTML="Fat= "+Math.round(fat)+"gm";
+                    }
+
+                }
+            </script>
+    </body>
+</html>
